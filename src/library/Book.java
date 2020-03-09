@@ -23,6 +23,9 @@ public class Book {
 		public Book() {
 			// TODO 自動生成されたコンストラクター・スタブ
 		}
+		public Book(String str) {
+			// TODO 自動生成されたコンストラクター・スタブ
+		}
 		public String toString() {
 			return id +"-"+ name +"-"+ author +"-"+ price;
 		}

@@ -170,7 +170,6 @@ public class Manager {
 			//update文の実行
 			stmt = conn.createStatement();
 			String sql = "DELETE FROM books book_id WHERE book_id = "+id+";";
-			System.out.println(sql);
 			stmt.executeUpdate(sql);
 			conn.commit();
 			System.out.println("削除されました");
@@ -189,6 +188,94 @@ public class Manager {
 				e.printStackTrace();
 			}
 		}
+	}
+	//按ID查询图书的方法query，要求返回Book类型
+	@SuppressWarnings("null")
+	public Book query(int id) {
+		String str = null;
+		Book bk = new Book(str);
+
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+
+		//接続文字列
+		String url = "jdbc:postgresql://localhost:5432/zhongxin";
+		String user = "postgres";
+		String password = "postgres";
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			//PostgreSQLへ接続
+			conn = DriverManager.getConnection(url, user, password);
+			//自動コミットOFF
+			conn.setAutoCommit(false);
+			//update文の実行
+			stmt = conn.createStatement();
+			String sql = "SELECT * FROM books WHERE book_id = "+id+";";
+			stmt.executeUpdate(sql);
+			conn.commit();
+			str.equals(sql);
+
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rset != null)
+					rset.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return bk;
+	}
+	//按作者查询的图书的方法 query，要求返回Book类型
+	@SuppressWarnings("null")
+	public Book query(String author) {
+		String str = null;
+		Book bk = new Book(str);
+
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+
+		//接続文字列
+		String url = "jdbc:postgresql://localhost:5432/zhongxin";
+		String user = "postgres";
+		String password = "postgres";
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			//PostgreSQLへ接続
+			conn = DriverManager.getConnection(url, user, password);
+			//自動コミットOFF
+			conn.setAutoCommit(false);
+			//update文の実行
+			stmt = conn.createStatement();
+			String sql = "SELECT * FROM books WHERE book_author = "+author+";";
+			stmt.executeUpdate(sql);
+			conn.commit();
+			str.equals(sql);
+
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rset != null)
+					rset.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return bk;
 	}
 }
 
